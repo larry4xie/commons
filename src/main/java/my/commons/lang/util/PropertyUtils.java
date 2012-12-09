@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import my.commons.Assert;
+
 /**
  * <p>
  * Properties 工具类
@@ -133,9 +135,7 @@ public class PropertyUtils {
 	 * @throws IOException if loading failed
 	 */
 	public static void fillProperties(Properties props, InputStream... in) throws IOException {
-		if (in == null) {
-			throw new IllegalArgumentException("in must not be null");
-		}
+		Assert.notNull(in, "in must not be null");
 		for(InputStream is : in) {
 			props.load(is);
 		}
@@ -148,9 +148,7 @@ public class PropertyUtils {
 	 * @throws IOException if loading failed
 	 */
 	public static void fillProperties(Properties props, URL... url) throws IOException {
-		if (url == null) {
-			throw new IllegalArgumentException("url must not be null");
-		}
+		Assert.notNull(url, "url must not be null");
 		for(URL u : url) {
 			InputStream in = null;
 			try {
@@ -169,9 +167,7 @@ public class PropertyUtils {
 	 * @throws IOException if loading failed
 	 */
 	public static void fillProperties(Properties props, URI... uri) throws IOException {
-		if (uri == null) {
-			throw new IllegalArgumentException("uri must not be null");
-		}
+		Assert.notNull(uri, "uri must not be null");
 		for (URI u : uri) {
 			fillProperties(props, u.toURL());
 		}
@@ -184,9 +180,7 @@ public class PropertyUtils {
 	 * @throws IOException if loading failed
 	 */
 	public static void fillProperties(Properties props, File... file) throws IOException {
-		if (file == null) {
-			throw new IllegalArgumentException("file must not be null");
-		}
+		Assert.notNull(file, "file must not be null");
 		for(File f : file) {
 			InputStream in = null;
 			try {

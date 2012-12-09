@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import my.commons.Assert;
 import my.commons.db.util.JdbcUtils;
 import my.commons.framework.mybatis.MybatisUtils;
 import my.commons.framework.mybatis.batch.Batch;
@@ -124,8 +125,6 @@ public class DaoSupport extends org.springframework.dao.support.DaoSupport {
 	 * {@inheritDoc}
 	 */
 	protected void checkDaoConfig() {
-		if (this.sqlSession == null) {
-			throw new IllegalArgumentException("Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required");
-		}
+		Assert.notNull(this.sqlSession, "Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required");
 	}
 }

@@ -2,6 +2,7 @@ package my.commons.framework.mybatis.spring;
 
 import java.util.Map;
 
+import my.commons.Assert;
 import my.commons.dao.DataRoutingContextHolder;
 
 import org.apache.ibatis.session.SqlSession;
@@ -53,12 +54,8 @@ public class DynamicDaoSupport extends DaoSupport {
 	 */
 	@Override
 	protected void checkDaoConfig() {
-		if (this.targetSqlSessionFactorys == null) {
-			throw new IllegalArgumentException("Property 'targetSqlSessionFactorys' is required");
-		}
-		if (this.defaultTargetSqlSessionFactory == null) {
-			throw new IllegalArgumentException("Property 'defaultTargetSqlSessionFactory' is required");
-		}
+		Assert.notNull(this.targetSqlSessionFactorys, "Property 'targetSqlSessionFactorys' is required");
+		Assert.notNull(this.defaultTargetSqlSessionFactory, "Property 'defaultTargetSqlSessionFactory' is required");
 		super.checkDaoConfig();
 	}
 

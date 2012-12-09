@@ -2,6 +2,7 @@ package my.commons.cache.spring;
 
 import java.util.Collection;
 
+import my.commons.Assert;
 import my.commons.cache.Cache;
 import my.commons.cache.CacheManager;
 
@@ -40,8 +41,6 @@ public class CacheManagerAdaptor implements org.springframework.cache.CacheManag
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if(null == this.cacheManager) {
-			throw new IllegalArgumentException("Property 'cacheManager' are required");
-		}
+		Assert.notNull(this.cacheManager, "Property 'cacheManager' are required");
 	}
 }
