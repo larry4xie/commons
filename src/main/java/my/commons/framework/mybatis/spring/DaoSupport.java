@@ -17,6 +17,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.SqlSessionUtils;
 
 
 /** 
@@ -77,12 +78,20 @@ public class DaoSupport extends org.springframework.dao.support.DaoSupport {
 	public long selectCount(SqlSession sqlSession, String statement, Object parameter) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
+		SqlSession ss = null;
+		SqlSessionFactory sf = null;
 		try {
 			long count = 0L;
 			MappedStatement mst = sqlSession.getConfiguration().getMappedStatement(statement);
 			BoundSql boundSql = mst.getBoundSql(parameter); // PreparedStatement sql
 			String sql = "select count(*) total_count from (" + boundSql.getSql()+ ") tb";
-			Connection conn = sqlSession.getConnection();
+			
+			//Connection conn = sqlSession.getConnection(); // bug get closed connection
+			SqlSessionTemplate st = (SqlSessionTemplate) sqlSession;
+			sf = st.getSqlSessionFactory();
+			ss = SqlSessionUtils.getSqlSession(sf, st.getExecutorType(), st.getPersistenceExceptionTranslator());
+			Connection conn = ss.getConnection();
+			
 			if (MybatisUtils.PREPAREDSTATEMENT_LOG.isDebugEnabled() || MybatisUtils.CONNECTION_LOG.isDebugEnabled()) { // log proxy
 				conn =  ConnectionLogger.newInstance(conn, MybatisUtils.PREPAREDSTATEMENT_LOG);
 			}
@@ -96,6 +105,9 @@ public class DaoSupport extends org.springframework.dao.support.DaoSupport {
 		} finally {
 			JdbcUtils.closeResultSet(rs);
 			JdbcUtils.closeStatement(stmt);
+			if (null != ss && null != sf) {
+				SqlSessionUtils.closeSqlSession(ss, sf);
+			}
 		}
 	}
 	
