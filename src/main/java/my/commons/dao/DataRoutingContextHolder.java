@@ -43,7 +43,7 @@ public class DataRoutingContextHolder {
 	 * @param context
 	 */
 	public static <T> void setUniqueContext(T context) {
-		if(contextHolder.get() != null) {
+		if(contextHolder.get() == null) {
 			DataRoutingContextHolder.setContext(context);
 		}
 	}
