@@ -50,11 +50,11 @@ public class OracleDialect extends Dialect {
 
 	@Override
 	public void setLimitParamters(PreparedStatement ps, int parameterSize, int offset, int limit) throws SQLException {
-		int index = 1;
-		ps.setInt(parameterSize + index, limit);
 		if(offset > 0) {
-			ps.setInt(parameterSize + index, offset);
-			index++;
+			ps.setInt(parameterSize + 1, offset + limit);
+			ps.setInt(parameterSize + 2, offset);
+		} else {
+			ps.setInt(parameterSize + 1, limit);
 		}
 	}
 

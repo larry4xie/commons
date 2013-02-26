@@ -146,5 +146,6 @@ public class ConcurrentMapCache implements Cache {
 	 *
 	 */
 	private static class NullHolder implements Serializable {
+		private static final long serialVersionUID = 6183166565484762770L;
 	}
 }
