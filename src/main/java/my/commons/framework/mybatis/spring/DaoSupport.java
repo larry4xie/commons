@@ -81,7 +81,7 @@ public class DaoSupport extends org.springframework.dao.support.DaoSupport {
 			long count = 0L;
 			MappedStatement mst = sqlSession.getConfiguration().getMappedStatement(statement);
 			BoundSql boundSql = mst.getBoundSql(parameter); // PreparedStatement sql
-			String sql = "select count(*) as total_count from (" + boundSql.getSql()+ ") as tb";
+			String sql = "select count(*) total_count from (" + boundSql.getSql()+ ") tb";
 			Connection conn = sqlSession.getConnection();
 			if (MybatisUtils.PREPAREDSTATEMENT_LOG.isDebugEnabled() || MybatisUtils.CONNECTION_LOG.isDebugEnabled()) { // log proxy
 				conn =  ConnectionLogger.newInstance(conn, MybatisUtils.PREPAREDSTATEMENT_LOG);
