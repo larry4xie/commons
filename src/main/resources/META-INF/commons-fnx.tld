@@ -206,6 +206,17 @@
 
 
 <!-- JSTL functions extension -->
+	<function>
+		<name>encodeURI</name>
+		<function-class>cn.com.cybertech.commons.web.taglibs.functions.Functions</function-class>
+		<function-signature>java.lang.String encodeURI(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>decodeURI</name>
+		<function-class>cn.com.cybertech.commons.web.taglibs.functions.Functions</function-class>
+		<function-signature>java.lang.String decodeURI(java.lang.String)</function-signature>
+	</function>
+
 	<!-- start: commons-lang3 StringUtils -->
 	<!-- Empty checks -->
 	<function>
