@@ -162,6 +162,35 @@ public class DateUtils {
 	}
 	
 	/**
+	 * 判断两个两个时间是不是同一个小时
+	 * 
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	public static boolean isSameHour(Date date1, Date date2) {
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(date1);
+		Calendar cal2 = Calendar.getInstance();
+		cal2.setTime(date2);
+		return isSameHour(cal1, cal2);
+	}
+	
+	/**
+	 * 判断两个两个时间是不是同一个小时
+	 * 
+	 * @param cal1
+	 * @param cal2
+	 * @return
+	 */
+	public static boolean isSameHour(Calendar cal1, Calendar cal2) {
+		return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA)
+				&& cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && 
+				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) && 
+				cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY));
+	}
+	
+	/**
 	 * 判断两个两个时间是不是同一天
 	 * @param date1
 	 * @param date2
@@ -198,7 +227,7 @@ public class DateUtils {
 		cal1.setTime(date1);
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(date2);
-		return isSameDay(cal1, cal2);
+		return isSameWeek(cal1, cal2);
 	}
 	
 	/**
@@ -226,7 +255,7 @@ public class DateUtils {
 		cal1.setTime(date1);
 		Calendar cal2 = Calendar.getInstance();
 		cal2.setTime(date2);
-		return isSameDay(cal1, cal2);
+		return isSameMonth(cal1, cal2);
 	}
 	
 	/**
