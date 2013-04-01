@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -36,8 +37,10 @@ public class ActionSupport extends com.opensymphony.xwork2.ActionSupport {
 	
 	private HttpServletRequest request;
 	
+	private HttpServletResponse response;
+	
 	/**
-	 * 延迟初始化获取Request
+	 * 延迟初始化获取HttpServletRequest
 	 * 
 	 * @return
 	 */
@@ -52,6 +55,22 @@ public class ActionSupport extends com.opensymphony.xwork2.ActionSupport {
 		return request;
 	}
 
+	/**
+	 * 延迟初始化获取HttpServletResponse
+	 * 
+	 * @return
+	 */
+	protected HttpServletResponse getResponse() {
+		if(null == response) {
+			synchronized (this) {
+				if(null == response) {
+					response = ServletActionContext.getResponse();
+				}
+			}
+		}
+		return response;
+	}
+	
 	/**
 	 * 向请求中添加数据
 	 * @param attributeName 数据名称

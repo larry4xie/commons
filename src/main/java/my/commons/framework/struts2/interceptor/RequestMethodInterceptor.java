@@ -74,7 +74,7 @@ public class RequestMethodInterceptor extends AbstractInterceptor {
 			if(i >= ms.length) {
 				// unpass
 				HttpServletResponse response = (HttpServletResponse)actionContext.get(StrutsStatics.HTTP_RESPONSE);
-				response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404
+				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED); // 405
 				return null;
 			}
 		}
