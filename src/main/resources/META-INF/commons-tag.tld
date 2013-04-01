@@ -10,7 +10,7 @@
 	<uri>/commons-tag</uri>
 	<tag>
 		<name>pagination</name>
-		<tag-class>cn.com.cybertech.commons.web.taglibs.ui.PaginationTag</tag-class>
+		<tag-class>my.commons.web.taglibs.ui.PaginationTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<description><![CDATA[路径]]></description>
