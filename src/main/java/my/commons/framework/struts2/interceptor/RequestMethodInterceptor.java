@@ -10,7 +10,6 @@ import my.commons.framework.struts2.interceptor.annotation.RequestMethod;
 
 import org.apache.struts2.StrutsStatics;
 
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
@@ -74,7 +73,7 @@ public class RequestMethodInterceptor extends AbstractInterceptor {
 			if(i >= ms.length) {
 				// unpass
 				HttpServletResponse response = (HttpServletResponse)actionContext.get(StrutsStatics.HTTP_RESPONSE);
-				response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED); // 405
+				response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Request Method Not Supported"); // 405
 				return null;
 			}
 		}

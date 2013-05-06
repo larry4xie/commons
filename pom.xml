@@ -24,7 +24,7 @@
 		<jsp.api.version>2.1</jsp.api.version>
 		<mybatis.version>3.1.1</mybatis.version>
 		<mybatis.spring.version>1.1.1</mybatis.spring.version>
-		<springframework.version>3.1.3.RELEASE</springframework.version>
+		<springframework.version>3.1.4.RELEASE</springframework.version>
 		<fastjson.version>1.1.25</fastjson.version>
 		<ehcache.version>2.5.6</ehcache.version>
 		<hessian.version>4.0.7</hessian.version>
@@ -84,6 +84,12 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis.spring.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springframework.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>

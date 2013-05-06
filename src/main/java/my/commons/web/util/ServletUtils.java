@@ -28,6 +28,16 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ServletUtils {
 	/**
+	 * 判断请求是否是ajax请求
+	 * @param request
+	 * @return
+	 */
+	public static boolean isAjaxRequest(HttpServletRequest request) {
+		String requestedWith = request.getHeader("X-Requested-With");
+		return requestedWith != null ? "XMLHttpRequest".equals(requestedWith) : false;
+	}
+	
+	/**
 	 * 获取IP地址
 	 * @param request request current HTTP request
 	 * @return

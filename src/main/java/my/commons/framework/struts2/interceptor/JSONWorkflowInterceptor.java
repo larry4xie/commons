@@ -49,7 +49,7 @@ public class JSONWorkflowInterceptor extends MethodFilterInterceptor {
 	/**
 	 * 有error 时的 html 状态吗
 	 */
-	private int failedStatus = -1;
+	private int failedStatus = HttpServletResponse.SC_BAD_REQUEST; // default 400
 
 	/**
 	 * 编码
