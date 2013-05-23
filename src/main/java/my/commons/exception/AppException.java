@@ -39,26 +39,26 @@ public class AppException extends RuntimeException {
 		this(new ExDetail(code, message), cause);
 	}
 	
-	public AppException(ExDetail detail) {
+	protected AppException(ExDetail detail) {
 		super(detail.getMessage());
 		this.detail = detail;
 		
 		// 打印异常日志
-		LOG.error(this.detail.toString());
+		LOG.error(this.getClass().getSimpleName() + this.detail.toString());
 	}
 	
-	public AppException(ExDetail detail, Throwable cause) {
+	protected AppException(ExDetail detail, Throwable cause) {
 		super(detail.getMessage(), cause);
 		this.detail = detail;
 		
 		if (!(cause instanceof AppException)) { 
 			// 不是系统自定义的异常，打印异常日志
-			LOG.error(this.detail.toString(), cause);
+			LOG.error(this.getClass().getSimpleName() + this.detail.toString(), cause);
 		} else {
 			AppException e = (AppException)cause;
-			if (!e.getDetail().equals(this.detail)) {
+			if (!e.getDetail().equals(this.detail) && (e.getExCode() != this.getExCode() || this.detail.getMessage().length() > 0 )) {
 				// 包装详细信息发送变化
-				LOG.error(this.detail.toString());
+				LOG.error(e.getClass().getSimpleName() + " convert to " + this.getClass().getSimpleName() + this.detail.toString());
 			}
 		}
 	}

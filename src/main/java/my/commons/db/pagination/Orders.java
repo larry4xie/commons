@@ -1,5 +1,6 @@
 package my.commons.db.pagination;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import java.util.List;
  * @since 2013-1-21
  *
  */
-public class Orders {
+public class Orders implements Serializable {
+	private static final long serialVersionUID = 6669355737027817625L;
+	
 	/**
 	 * 排序模型条目
 	 */
@@ -74,7 +77,9 @@ public class Orders {
 	 * @since 2011-12-23
 	 *
 	 */
-	public class OrderItem {
+	public class OrderItem implements Serializable {
+		private static final long serialVersionUID = -5579367181519701180L;
+
 		/**
 		 * 默认降序
 		 * 

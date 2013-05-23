@@ -12,10 +12,14 @@ package my.commons.exception;
  *
  */
 public class ExDetail {
-	/** 异常编码 */
+	/**
+	 * 异常编码
+	 */
 	private int code;
 	
-	/** 异常信息,一般用于调试和日志,而不是用于提示用户的信息 */
+	/**
+	 * 异常信息,一般用于调试和日志,而不是用于提示用户的信息
+	 */
 	private String message;
 
 	public ExDetail(int code) {
@@ -43,7 +47,7 @@ public class ExDetail {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	/**
 	 * 获取描述
 	 * 
@@ -51,24 +55,18 @@ public class ExDetail {
 	 */
 	@Override
 	public String toString() {
-		return new StringBuffer().append('[').append(code).append(']').append(message).toString();
+		return new StringBuffer().append("[code=").append(code).append(", message=").append(message).append("]").toString();
 	}
-	
-	/**
-	 * message字段只会在比较的两个对象都不是空串时候进行
-	 */
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + code;
-		result = prime * result + ((message == null || message.length() == 0) ? 0 : message.hashCode());
+		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		return result;
 	}
 
-	/**
-	 * message字段只会在比较的两个对象都不是空串时候进行
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,8 +78,9 @@ public class ExDetail {
 		ExDetail other = (ExDetail) obj;
 		if (code != other.code)
 			return false;
-		if (message == null || message.length() == 0 || other.message == null || other.message.length() == 0)  {
-			return true;
+		if (message == null) {
+			if (other.message != null)
+				return false;
 		} else if (!message.equals(other.message))
 			return false;
 		return true;

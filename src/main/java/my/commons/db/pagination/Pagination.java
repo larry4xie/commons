@@ -1,5 +1,7 @@
 package my.commons.db.pagination;
 
+import java.io.Serializable;
+
 /**
  * 分页模型,需要设置每一页的数据量和总数据量后即可使用<br/>
  * 每一页的数据量可以设置也可以使用默认值
@@ -8,7 +10,9 @@ package my.commons.db.pagination;
  * @since 2013-1-21
  *
  */
-public class Pagination {
+public class Pagination implements Serializable {
+	private static final long serialVersionUID = -8343504471038714748L;
+
 	/**
 	 * 默认每一页的数据量
 	 */
@@ -49,10 +53,10 @@ public class Pagination {
 		if (this.currentPage < 1) {
 			this.currentPage = 1;
 		}
-		if (currentPage > currentPage) {
+		if (this.currentPage > this.totalPage) {
 			this.currentPage = this.totalPage;
 		}
-		return currentPage;
+		return this.currentPage;
 	}
 	
 	/**
