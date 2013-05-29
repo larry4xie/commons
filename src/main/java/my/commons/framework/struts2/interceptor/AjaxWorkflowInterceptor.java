@@ -13,7 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import my.commons.exception.Result;
+import my.commons.Result;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.TextProvider;
@@ -79,9 +79,9 @@ public class AjaxWorkflowInterceptor extends MethodFilterInterceptor {
 			response.setCharacterEncoding(encoding);
 			
 			PrintWriter out = response.getWriter();
-			out.print(error.toAjaxString());
+			out.print(error.toJsonString());
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(new StringBuffer("Errors on action and write to response json errors = ").append(error.toAjaxString()).toString());
+				LOG.debug(new StringBuffer("Errors on action and write to response json errors = ").append(error.toJsonString()).toString());
 			}
 			out.flush();
 			return null;

@@ -6,8 +6,8 @@ import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import my.commons.Result;
 import my.commons.exception.AppException;
-import my.commons.exception.Result;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;

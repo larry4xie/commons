@@ -1,6 +1,7 @@
 package my.commons.web.util;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import my.commons.Result;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -281,6 +284,36 @@ public class ServletUtils {
 				response.sendRedirect(request.getContextPath() + pageUrl);
 			} else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Not Found");
+			}
+		}
+	}
+	
+	/**
+	 * 将result中的属性添加到请求
+	 * 
+	 * @param request
+	 * @param result
+	 * 
+	 * @see Result
+	 */
+	public static void addResult2Request(HttpServletRequest request, Result result) {
+		for (Entry<String, Object> entry : result.entrySet()) {
+			request.setAttribute(entry.getKey(), entry.getValue());
+		}
+	}
+	
+	/**
+	 * 将result中的属性合并到请求
+	 * 
+	 * @param request
+	 * @param result
+	 * 
+	 * @see Result
+	 */
+	public static void mergeResult2Request(HttpServletRequest request, Result result) {
+		for (Entry<String, Object> entry : result.entrySet()) {
+			if (request.getAttribute(entry.getKey()) == null) {
+				request.setAttribute(entry.getKey(), entry.getValue());
 			}
 		}
 	}

@@ -8,8 +8,8 @@ import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import my.commons.Result;
 import my.commons.exception.AppException;
-import my.commons.exception.Result;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.TextProvider;
@@ -50,9 +50,9 @@ public class AjaxExceptionInterceptor extends AbstractInterceptor {
 				
 				PrintWriter out = response.getWriter();
 				Result result = new Result(e.getExCode(), tp.getText("ex." + e.getExCode()));
-				out.print(result.toAjaxString()); // output Ajax String
+				out.print(result.toJsonString()); // output Ajax String
 				if (LOG.isDebugEnabled()) {
-					LOG.debug(new StringBuffer("Catch a Appexception and write to response json errors = ").append(result.toAjaxString()).toString());
+					LOG.debug(new StringBuffer("Catch a Appexception and write to response json errors = ").append(result.toJsonString()).toString());
 				}
 				out.flush();
 			}

@@ -6,8 +6,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my.commons.Result;
 import my.commons.exception.AppException;
-import my.commons.exception.Result;
 import my.commons.framework.springmvc.MessageUtils;
 import my.commons.framework.springmvc.annotation.ResponseMapping;
 import my.commons.framework.springmvc.annotation.ResponseMappings;
@@ -116,9 +116,9 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 			response.setCharacterEncoding(encoding);
 			
 			PrintWriter out = response.getWriter();
-			out.print(result.toAjaxString()); // output Ajax String
+			out.print(result.toJsonString()); // output Ajax String
 			if (logger.isDebugEnabled()) {
-				logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and write to response json errors = ").append(result.toAjaxString()).toString());
+				logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and write to response json errors = ").append(result.toJsonString()).toString());
 			}
 			out.flush();
 			return new ModelAndView();
@@ -128,7 +128,7 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 				request.setAttribute(Result.RET, result.getRet());
 				request.setAttribute(Result.MSG, result.getMsg());
 				if (logger.isDebugEnabled()) {
-					logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and write error to request = ").append(result.toAjaxString()).toString());
+					logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and write error to request = ").append(result.toJsonString()).toString());
 				}
 				return new ModelAndView(viewName);
 			}
