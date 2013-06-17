@@ -2,6 +2,8 @@ package my.commons.framework.springmvc.exception;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import my.commons.exception.AppException;
 import my.commons.framework.springmvc.MessageUtils;
 import my.commons.framework.springmvc.annotation.ResponseMapping;
 import my.commons.framework.springmvc.annotation.ResponseMappings;
+import my.commons.lang.collections.Pair;
 import my.commons.web.util.ServletUtils;
 
 import org.springframework.beans.TypeMismatchException;
@@ -61,6 +64,14 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 	
 	public CommonHandlerExceptionResolver() {
 		setOrder(Ordered.HIGHEST_PRECEDENCE);
+	}
+	
+	private String encodeURI(String urlMsg) {
+		try {
+			return URLEncoder.encode(urlMsg, encoding);
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
 	}
 
 	@Override
@@ -123,14 +134,25 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 			out.flush();
 			return new ModelAndView();
 		} else {
-			String viewName = resolveErrorViewName(handler);
-			if (viewName != null) {
-				request.setAttribute(Result.RET, result.getRet());
-				request.setAttribute(Result.MSG, result.getMsg());
-				if (logger.isDebugEnabled()) {
-					logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and write error to request = ").append(result.toJsonString()).toString());
+			Pair<String, String> view = resolveErrorViewName(handler);
+			if (view != null) {
+				if (ResponseMapping.REDIRECT.equalsIgnoreCase(view.getFirst())) { // type REDIRECT
+					if (logger.isDebugEnabled()) {
+						logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and redirect and write error to request = ").append(result.toJsonString()).toString());
+					}
+					ModelAndView mav = new ModelAndView("redirect:" + view.getSecond());
+					mav.addObject(Result.RET, result.getRet());
+					mav.addObject(Result.MSG, encodeURI(result.getMsg()));
+					return mav;
+				} else { // type FORWARD
+					request.setAttribute(Result.RET, result.getRet());
+					request.setAttribute(Result.MSG, result.getMsg());
+					if (logger.isDebugEnabled()) {
+						logger.debug(new StringBuffer("Catch a ").append(ex.getClass().getSimpleName()).append(" and forward and write error to request = ").append(result.toJsonString()).toString());
+					}
+					return new ModelAndView(view.getSecond());
 				}
-				return new ModelAndView(viewName);
+				
 			}
 			// 不处理
 			return null;
@@ -140,9 +162,9 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 	/**
 	 * 获取ResponseMapping name error
 	 * @param handler
-	 * @return 没配置获取null
+	 * @return <type, viewname> or null
 	 */
-	private String resolveErrorViewName(Object handler) {
+	private Pair<String, String> resolveErrorViewName(Object handler) {
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod hm = (HandlerMethod) handler;
 			ResponseMappings responseMappings = hm.getMethodAnnotation(ResponseMappings.class);
@@ -150,8 +172,8 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 				ResponseMapping[] rms = responseMappings.value();
 				if (rms != null && rms.length > 0) {
 					for (ResponseMapping rm : rms) {
-						if (ResponseMapping.ERROR.equals(rm.name())) {
-							return rm.value();
+						if (ResponseMapping.ERROR.equalsIgnoreCase(rm.name())) {
+							return new Pair<String, String>(rm.type(), rm.value());
 						}
 					}
 				}

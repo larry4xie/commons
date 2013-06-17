@@ -17,8 +17,13 @@ import java.lang.annotation.Target;
 @Documented
 public @interface ResponseMapping {
 	String name() default ERROR;
+	String type() default FORWARD;
 	String value();
 	
 	// constant
 	public static final String ERROR = "ERROR";
+	
+	// type
+	public static final String FORWARD = "FORWARD";
+	public static final String REDIRECT = "REDIRECT";
 }

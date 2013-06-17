@@ -53,8 +53,9 @@ public class Pagination implements Serializable {
 		if (this.currentPage < 1) {
 			this.currentPage = 1;
 		}
-		if (this.currentPage > this.totalPage) {
-			this.currentPage = this.totalPage;
+		int totalPage = getTotalPage();
+		if (this.currentPage > totalPage) {
+			this.currentPage = totalPage;
 		}
 		return this.currentPage;
 	}
