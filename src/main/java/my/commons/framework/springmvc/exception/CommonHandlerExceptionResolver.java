@@ -2,8 +2,6 @@ package my.commons.framework.springmvc.exception;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,14 +65,6 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 		setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 	
-	private String encodeURI(String urlMsg) {
-		try {
-			return URLEncoder.encode(urlMsg, encoding);
-		} catch (UnsupportedEncodingException e) {
-			return "";
-		}
-	}
-
 	@Override
 	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 		try {
@@ -143,7 +133,8 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 					}
 					ModelAndView mav = new ModelAndView("redirect:" + view.getSecond());
 					mav.addObject(Result.RET, result.getRet());
-					mav.addObject(Result.MSG, encodeURI(result.getMsg()));
+					//不需要编码，RedirectView.class会用request.charactorEncoding()的编码去编码modelmap中的属性，然后放到重定向url后面
+					mav.addObject(Result.MSG, result.getMsg());
 					return mav;
 				} else { // type FORWARD
 					request.setAttribute(Result.RET, result.getRet());
