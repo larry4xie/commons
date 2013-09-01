@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
 import my.commons.Constants;
 import my.commons.db.pagination.Pagination;
+import my.commons.web.util.ServletUtils;
+
+import org.apache.commons.lang3.StringUtils;
+
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -22,6 +27,7 @@ import freemarker.template.TemplateException;
  * 
  * <ul>
  * 	<li>url</li>
+ * <li>excludeParams</li>
  * 	<li>page 当前页数</li>
  * 	<li>totalPage 总页数</li>
  * 	<li>pageSize 每一页数据量</li>
@@ -45,6 +51,9 @@ public class PaginationTag extends FreemarkerTagSupport {
 	 * 路径
 	 */
 	private String url;
+	
+	/** 自动获取url时排除的参数 */
+	private String excludeParams = Constants.PAGINATION_PARAMETERS;
 	
 	/**
 	 * 分页模型
@@ -80,6 +89,12 @@ public class PaginationTag extends FreemarkerTagSupport {
 	public int doEndTag() throws JspException {
 		Template template = null;
 		try {
+			// get default url
+			if(null == this.url || StringUtils.isBlank(this.url)) {
+				this.url = ServletUtils.getRequestURI( (HttpServletRequest) this.pageContext.getRequest(),
+						my.commons.lang.util.StringUtils.trim(this.excludeParams.split(",")));
+			}
+						
 			try {
 				template = this.freemarkerConfiguration.getTemplate(this.theme, this.encoding);
 			} catch (Exception e) {
@@ -155,5 +170,9 @@ public class PaginationTag extends FreemarkerTagSupport {
 
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+	
+	public void setExcludeParams(String excludeParams) {
+		this.excludeParams = excludeParams;
 	}
 }

@@ -3,21 +3,37 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
 	version="2.1">
 
-	<description><![CDATA[-tag]]></description>
+	<description>>commons-tag</description>
 	<display-name>commons-tag</display-name>
 	<tlib-version>1.0</tlib-version>
 	<short-name>ct</short-name>
 	<uri>/commons-tag</uri>
 	<tag>
+		<description>
+		<![CDATA[
+			pagination tag
+			url 和 excludeParams都是选填项
+			model 和 page、pageSize、rowCount 只需要二选一
+		]]>
+		</description>
 		<name>pagination</name>
 		<tag-class>my.commons.web.taglibs.ui.PaginationTag</tag-class>
 		<body-content>empty</body-content>
+		
 		<attribute>
 			<description><![CDATA[路径]]></description>
 			<name>url</name>
-			<required>true</required>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		
+		<attribute>
+			<description><![CDATA[自动获取url时排除的参数]]></description>
+			<name>excludeParams</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
 		<attribute>
 			<description><![CDATA[链接参数前缀]]></description>
 			<name>prefix</name>
