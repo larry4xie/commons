@@ -108,61 +108,61 @@ public class MessageUtils {
 	}
 	
 	// URIEncodingMessage
-		private static String encodeURI(String urlMsg) {
-			try {
-				return URLEncoder.encode(urlMsg, URL_ENCODING);
-			} catch (UnsupportedEncodingException e) {
-				return "";
-			}
+	private static String encodeURI(String urlMsg) {
+		try {
+			return URLEncoder.encode(urlMsg, URL_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			return "";
 		}
-		
-		/**
-		 * Retrieve the URIEncodingMessage for the given code
-		 * 
-		 * @param request
-		 * @param code code of the message
-		 * @return
-		 * @throws NoSuchMessageException
-		 */
-		public static String getURIEncodingMessage(HttpServletRequest request, String code) throws NoSuchMessageException {
-			return encodeURI(MessageUtils.getMessage(request, code, new Object[]{}));
-		}
-		
-		/**
-		 * Retrieve the URIEncodingMessage for the given code
-		 * 
-		 * @param request
-		 * @param code code of the message
-		 * @param defaultMessage defaultMessage String to return if the lookup fails
-		 * @return
-		 */
-		public static String getURIEncodingMessage(HttpServletRequest request, String code, String defaultMessage) {
-			return encodeURI(MessageUtils.getMessage(request, code, new Object[]{}, defaultMessage));
-		}
-		
-		/**
-		 * Retrieve the URIEncodingMessage for the given code
-		 * 
-		 * @param request
-		 * @param code code of the message
-		 * @param args arguments for the message, or <code>null</code> if none
-		 * @return
-		 * @throws NoSuchMessageException
-		 */
-		public static String getURIEncodingMessage(HttpServletRequest request, String code, Object[] args) throws NoSuchMessageException {
-			return encodeURI(MessageUtils.getMessage(request, code, args));
-		}
-		
-		/**
-		 * Retrieve the URIEncodingMessage for the given code
-		 * 
-		 * @param request
-		 * @param code code of the message
-		 * @param args arguments for the message, or <code>null</code> if none
-		 * @param defaultMessage defaultMessage String to return if the lookup fails
-		 * @return
-		 */
-		public static String getURIEncodingMessage(HttpServletRequest request, String code, Object[] args, String defaultMessage) {
-			return encodeURI(MessageUtils.getMessage(request, code, args, defaultMessage));
-		}
+	}
+	
+	/**
+	 * Retrieve the URIEncodingMessage for the given code
+	 * 
+	 * @param request
+	 * @param code code of the message
+	 * @return
+	 * @throws NoSuchMessageException
+	 */
+	public static String getURIEncodingMessage(HttpServletRequest request, String code) throws NoSuchMessageException {
+		return encodeURI(MessageUtils.getMessage(request, code, new Object[]{}));
+	}
+	
+	/**
+	 * Retrieve the URIEncodingMessage for the given code
+	 * 
+	 * @param request
+	 * @param code code of the message
+	 * @param defaultMessage defaultMessage String to return if the lookup fails
+	 * @return
+	 */
+	public static String getURIEncodingMessage(HttpServletRequest request, String code, String defaultMessage) {
+		return encodeURI(MessageUtils.getMessage(request, code, new Object[]{}, defaultMessage));
+	}
+	
+	/**
+	 * Retrieve the URIEncodingMessage for the given code
+	 * 
+	 * @param request
+	 * @param code code of the message
+	 * @param args arguments for the message, or <code>null</code> if none
+	 * @return
+	 * @throws NoSuchMessageException
+	 */
+	public static String getURIEncodingMessage(HttpServletRequest request, String code, Object[] args) throws NoSuchMessageException {
+		return encodeURI(MessageUtils.getMessage(request, code, args));
+	}
+	
+	/**
+	 * Retrieve the URIEncodingMessage for the given code
+	 * 
+	 * @param request
+	 * @param code code of the message
+	 * @param args arguments for the message, or <code>null</code> if none
+	 * @param defaultMessage defaultMessage String to return if the lookup fails
+	 * @return
+	 */
+	public static String getURIEncodingMessage(HttpServletRequest request, String code, Object[] args, String defaultMessage) {
+		return encodeURI(MessageUtils.getMessage(request, code, args, defaultMessage));
+	}
 }

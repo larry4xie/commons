@@ -216,6 +216,11 @@
 		<function-class>cn.com.cybertech.commons.web.taglibs.functions.Functions</function-class>
 		<function-signature>java.lang.String decodeURI(java.lang.String)</function-signature>
 	</function>
+	<function>
+		<name>originRequestURI</name>
+		<function-class>cn.com.cybertech.commons.web.taglibs.functions.Functions</function-class>
+		<function-signature>java.lang.String originRequestURI(javax.servlet.jsp.PageContext)</function-signature>
+	</function>
 
 	<!-- start: commons-lang3 StringUtils -->
 	<!-- Empty checks -->
