@@ -13,6 +13,18 @@ import org.apache.commons.lang3.CharUtils;
  */
 public class StringUtils {
 	/**
+	 * String trim for String Array
+	 * @param strArray
+	 * @return
+	 */
+	public static String[] trim(String... strArray) {
+		for (int i = 0; i < strArray.length; i++) {
+			strArray[i] = strArray[i].trim();
+		}
+		return strArray;
+	}
+	
+	/**
 	 * 是否空白，包括0
 	 * <pre>
 	 * StringUtils.isBlankIncludeZero(null)      = true
