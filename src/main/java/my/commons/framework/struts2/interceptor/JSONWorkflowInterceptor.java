@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my.commons.Constants;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.struts2.ServletActionContext;
 
@@ -54,7 +56,7 @@ public class JSONWorkflowInterceptor extends MethodFilterInterceptor {
 	/**
 	 * 编码
 	 */
-	private String encoding = "UTF-8";
+	private String encoding = Constants.ENCODING;
 
 	/**
 	 * 是否开启

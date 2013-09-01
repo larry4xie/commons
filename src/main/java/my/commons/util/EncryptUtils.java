@@ -12,6 +12,8 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import my.commons.Constants;
+
 /**
  * <p>
  * 加密工具类<br/>
@@ -46,7 +48,7 @@ public class EncryptUtils {
 	/**
 	 * 默认编码
 	 */
-	private final static String DEFAULT_CHARSET = "UTF-8";
+	private final static String DEFAULT_CHARSET = Constants.ENCODING;
 	
 	/** 加密算法BASE64 */
 	public final static String ALGORITHM_BASE64 = "BASE64";

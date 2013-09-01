@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my.commons.Constants;
+
 /**
  * <p>
  * 字符集过滤器<br/>
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public class CharacterEncodingFilter extends OnceRequestFilter {
-	private static final String DEFAULT_ENCODING = "UTF-8";
+	private static final String DEFAULT_ENCODING = Constants.ENCODING;
 	private static final String FILTER_PARAM_ENCODING = "encoding";
 	private static final String FILTER_PARAM_FORCEENCODING = "forceEncoding";
 	

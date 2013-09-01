@@ -4,12 +4,13 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import my.commons.Constants;
+import my.commons.Result;
+import my.commons.exception.AppException;
+
 import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import my.commons.Result;
-import my.commons.exception.AppException;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.TextProvider;
@@ -27,7 +28,7 @@ public class AjaxExceptionInterceptor extends AbstractInterceptor {
 	private static final Logger LOG = LoggerFactory.getLogger(AjaxExceptionInterceptor.class);
 	
 	/** 编码 */
-	private String encoding = "UTF-8";
+	private String encoding = Constants.ENCODING;
 	
 	/** HTTP status */
 	private int httpStatus = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;

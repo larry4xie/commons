@@ -6,6 +6,8 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import my.commons.Constants;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.context.WebApplicationContext;
@@ -19,7 +21,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  *
  */
 public class MessageUtils {
-	public static String URL_ENCODING = "UTF-8";
+	public static String URL_ENCODING = Constants.ENCODING;
 	
 	private MessageUtils() {}
 	

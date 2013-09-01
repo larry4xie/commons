@@ -9,11 +9,12 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
+import my.commons.Constants;
+import my.commons.Result;
+
 import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import my.commons.Result;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.TextProvider;
@@ -32,7 +33,7 @@ public class AjaxWorkflowInterceptor extends MethodFilterInterceptor {
 	private static final Logger LOG = LoggerFactory.getLogger(AjaxWorkflowInterceptor.class);
 
 	/** 编码 */
-	private String encoding = "UTF-8";
+	private String encoding = Constants.ENCODING;
 	/** HTTP status */
 	private int httpStatus = HttpServletResponse.SC_BAD_REQUEST;
 	private final static String CONTENTTYPE_JSON = "application/json";

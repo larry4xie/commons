@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
+import my.commons.Constants;
 import my.commons.db.pagination.Pagination;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -38,7 +39,7 @@ public class PaginationTag extends FreemarkerTagSupport {
 	public static String DEFAULT_THEME = "pagination.ftl";
 	
 	/** 默认编码 */
-	public static String DEFAULT_ENCODING = "UTF-8";
+	public static String DEFAULT_ENCODING = Constants.ENCODING;
 
 	/**
 	 * 路径

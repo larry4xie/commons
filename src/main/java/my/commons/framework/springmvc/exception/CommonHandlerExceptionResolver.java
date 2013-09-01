@@ -8,6 +8,7 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import my.commons.Constants;
 import my.commons.Result;
 import my.commons.exception.AppException;
 import my.commons.framework.springmvc.MessageUtils;
@@ -51,7 +52,7 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 	private final static String CONTENTTYPE_JSON = "application/json";
 	
 	/** 编码 */
-	private String encoding = "UTF-8";
+	private String encoding = Constants.ENCODING;
 	
 	private int codeExceptionBase = 99000; // 99_000
 	private boolean sameCode = true;
