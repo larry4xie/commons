@@ -1,6 +1,9 @@
 package my.commons.web.util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import my.commons.Constants;
 import my.commons.Result;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +34,8 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class ServletUtils {
+	public static String URL_ENCODING = Constants.ENCODING;
+	
 	/**
 	 * 判断请求是否是ajax请求
 	 * @param request
@@ -157,69 +163,184 @@ public class ServletUtils {
 		return ABSOLUTE_URL.matcher(url).matches();
 	}
 	
-	/**
-	 * 获取请求的路径，应用名称之后的部分<br/>
-	 * 比如：/index.jsp
-	 * 
-	 * @param req
-	 * @param query 返回的路径中是否包含QueryString
-	 * @return 获取请求的路径
-	 */
-	public static String buildRequestUrl(HttpServletRequest req, boolean query) {
-		return buildRequestUrl(req.getServletPath(), req.getPathInfo(), req.getRequestURI(), req.getContextPath(), query ? req.getQueryString() : null);
+	public static String encodeURI(String s) throws UnsupportedEncodingException {
+		return URLEncoder.encode(s, URL_ENCODING);
 	}
-
-	/**
-	 * 获取请求的路径，应用名称之后的部分
-	 * 
-	 * @param servletPath
-	 * @param pathInfo
-	 * @param requestURI
-	 * @param contextPath
-	 * @param queryString
-	 * @return
-	 */
-	private static String buildRequestUrl(String servletPath, String pathInfo, String requestURI, String contextPath, String queryString) {
-		StringBuilder url = new StringBuilder();
-		if (servletPath != null) {
-			url.append(servletPath);
-			if (pathInfo != null) {
-				url.append(pathInfo);
-			}
-		} else {
-			url.append(requestURI.substring(contextPath.length()));
-		}
-		if (queryString != null) {
-			url.append("?").append(queryString);
-		}
-		return url.toString();
+	
+	public static String decodeURI(String s) throws UnsupportedEncodingException {
+		return URLDecoder.decode(s, URL_ENCODING);
 	}
 	
 	/**
-	 * 获取请求的完整请求路径
-	 * 
-	 * @param req
-	 * @param query 返回的路径中是否包含QueryString
-	 * @return
+	 * @see #getRequestURL(HttpServletRequest, boolean, String[])
 	 */
-	public static String buildFullRequestUrl(HttpServletRequest req, boolean query) {
-		return buildFullRequestUrl(req.getScheme(), req.getServerName(), req.getServerPort(), req.getRequestURI(), req.getContextPath(), req.getServletPath(), req.getPathInfo(), query? req.getQueryString() : null);
+	public static String getRequestURLComponent(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+		return getRequestURLComponent(req, true, excludeParams);
 	}
-
+	
 	/**
-	 * 获取请求的完整请求路径
-	 * 
-	 * @param scheme
-	 * @param serverName
-	 * @param serverPort
-	 * @param requestURI
-	 * @param contextPath
-	 * @param servletPath
-	 * @param pathInfo
-	 * @param queryString
-	 * @return
+	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
 	 */
-	private static String buildFullRequestUrl(String scheme, String serverName, int serverPort, String requestURI, String contextPath, String servletPath, String pathInfo, String queryString) {
+	public static String getRequestURIComponent(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+		return getRequestURIComponent(req, true, excludeParams);
+	}
+	
+	/**
+	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestPATHComponent(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+		return getRequestPATHComponent(req, true, excludeParams);
+	}
+	
+	/**
+	 * @see #getRequestURL(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURLComponent(HttpServletRequest req) throws UnsupportedEncodingException {
+		return getRequestURLComponent(req, true, null);
+	}
+	
+	/**
+	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURIComponent(HttpServletRequest req) throws UnsupportedEncodingException {
+		return getRequestURIComponent(req, true, null);
+	}
+	
+	/**
+	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestPATHComponent(HttpServletRequest req) throws UnsupportedEncodingException {
+		return getRequestPATHComponent(req, true, null);
+	}
+	
+	/**
+	 * @see #getRequestURL(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURL(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+		return getRequestURL(req, true, excludeParams);
+	}
+	
+	/**
+	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURI(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+		return getRequestURI(req, true, excludeParams);
+	}
+	
+	/**
+	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestPATH(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+		return getRequestPATH(req, true, excludeParams);
+	}
+	
+	/**
+	 * @see #getRequestURL(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURL(HttpServletRequest req) throws UnsupportedEncodingException {
+		return getRequestURL(req, true, null);
+	}
+	
+	/**
+	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURI(HttpServletRequest req) throws UnsupportedEncodingException {
+		return getRequestURI(req, true, null);
+	}
+	
+	/**
+	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestPATH(HttpServletRequest req) throws UnsupportedEncodingException {
+		return getRequestPATH(req, true, null);
+	}
+	
+	/**
+	 * @see #getRequestURL(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURLComponent(HttpServletRequest req, boolean hasQuery, String[] excludeParams) throws UnsupportedEncodingException {
+		return URLEncoder.encode(getRequestURL(req, hasQuery, excludeParams), URL_ENCODING);
+	}
+	
+	/**
+	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestURIComponent(HttpServletRequest req, boolean hasQuery, String[] excludeParams) throws UnsupportedEncodingException {
+		return URLEncoder.encode(getRequestURI(req, hasQuery, excludeParams), URL_ENCODING);
+	}
+	
+	/**
+	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
+	 */
+	public static String getRequestPATHComponent(HttpServletRequest req, boolean hasQuery, String[] excludeParams) throws UnsupportedEncodingException {
+		return URLEncoder.encode(getRequestPATH(req, hasQuery, excludeParams), URL_ENCODING);
+	}
+	
+	/**
+	 * 获取请求的完整请求路径[支持forword的请求]<br/>
+	 * 比如：http://127.0.0.1:8080/app/user/index.jsp?v=1
+	 * 
+	 */
+	public static String getRequestURL(HttpServletRequest req, boolean hasQuery, String[] excludeParams) {
+		// request URI
+		String requestURI = (String) req.getAttribute("javax.servlet.forward.request_uri");
+		if(null == requestURI) {
+			requestURI = req.getRequestURI();
+		}
+		// query String
+		String queryString = null;
+		if (hasQuery) {
+			queryString = (String) req.getAttribute("javax.servlet.forward.query_string");
+			if(null == queryString) {
+				queryString = req.getQueryString();
+			}
+		}
+		return buildRequestURL(req.getScheme(), req.getServerName(), req.getServerPort(), requestURI, queryString, excludeParams);
+	}
+	
+	/**
+	 * 获取请求的路径[支持forword的请求]<br/>
+	 * 比如：/app/user/index.jsp?v=1
+	 */
+	public static String getRequestURI(HttpServletRequest req, boolean hasQuery, String[] excludeParams) {
+		// request URI
+		String requestURI = (String) req.getAttribute("javax.servlet.forward.request_uri");
+		if(null == requestURI) {
+			requestURI = req.getRequestURI();
+		}
+		// query String
+		String queryString = null;
+		if (hasQuery) {
+			queryString = (String) req.getAttribute("javax.servlet.forward.query_string");
+			if(null == queryString) {
+				queryString = req.getQueryString();
+			}
+		}
+		return buildRequestURI(requestURI, queryString, excludeParams);
+	}
+	
+	/**
+	 * 获取请求的路径，应用名称之后的部分[支持forword的请求]<br/>
+	 * 比如：/user/index.jsp?v=1
+	 */
+	public static String getRequestPATH(HttpServletRequest req, boolean hasQuery, String[] excludeParams) {
+		// request URI
+		String requestURI = (String) req.getAttribute("javax.servlet.forward.request_uri");
+		if(null == requestURI) {
+			requestURI = req.getRequestURI();
+		}
+		// query String
+		String queryString = null;
+		if (hasQuery) {
+			queryString = (String) req.getAttribute("javax.servlet.forward.query_string");
+			if(null == queryString) {
+				queryString = req.getQueryString();
+			}
+		}
+		return buildRequestPath(requestURI, req.getContextPath(), queryString, excludeParams);
+	}
+	
+	private static String buildRequestURL(String scheme, String serverName, int serverPort, String requestURI, String queryString, String[] excludeParams) {
 		scheme = scheme.toLowerCase();
 		StringBuilder url = new StringBuilder();
 		url.append(scheme).append("://").append(serverName);
@@ -233,18 +354,57 @@ public class ServletUtils {
 				url.append(":").append(serverPort);
 			}
 		}
-		if(servletPath != null) {
-			url.append(contextPath).append(servletPath);
-			if (pathInfo != null) {
-				url.append(pathInfo);
-			}
-		} else {
-			url.append(requestURI);
-		}
-		if (queryString != null) {
-			url.append("?").append(queryString);
+		url.append(requestURI);
+
+		queryString = queryStringExcludeParams(queryString, excludeParams);
+		if (queryString != null && queryString.length() > 0) {
+			url.append("?").append(queryStringExcludeParams(queryString, excludeParams));
 		}
 		return url.toString();
+	}
+
+	private static String buildRequestURI(String requestURI, String queryString, String[] excludeParams) {
+		StringBuilder url = new StringBuilder(requestURI);
+		queryString = queryStringExcludeParams(queryString, excludeParams);
+		if (queryString != null && queryString.length() > 0) {
+			url.append("?").append(queryStringExcludeParams(queryString, excludeParams));
+		}
+		return url.toString();
+	}
+	
+	private static String buildRequestPath(String requestURI, String contextPath, String queryString, String[] excludeParams) {
+		StringBuilder url = new StringBuilder(requestURI.substring(contextPath.length()));
+		queryString = queryStringExcludeParams(queryString, excludeParams);
+		if (queryString != null && queryString.length() > 0) {
+			url.append("?").append(queryStringExcludeParams(queryString, excludeParams));
+		}
+		return url.toString();
+	}
+	
+	private static String queryStringExcludeParams(String queryString, String[] excludeParams) {
+		if (null != queryString && queryString.length() > 0 && null != excludeParams && excludeParams.length > 0) {
+			StringBuffer sb = new StringBuffer();
+			String[] params = queryString.split("&");
+			for (String param : params) {
+				String[] paramPart = param.split("=");
+				int index;
+				for (index = excludeParams.length - 1; index >= 0; index--) {
+					if (paramPart[0].equals(excludeParams[index])) {
+						break;
+					}
+				}
+				if (index < 0) {
+					if(paramPart.length>1){
+						sb.append(paramPart[0]).append('=').append(paramPart[1]).append('&');
+					}else{
+						sb.append(paramPart[0]).append('=').append('&');
+					}
+				}
+			}
+			// update queryString
+			queryString = (sb.length() > 0 && sb.charAt(sb.length() - 1) == '&') ? sb.substring(0, sb.length() - 1) : sb.toString();
+		}
+		return queryString;
 	}
 	
 	/**
