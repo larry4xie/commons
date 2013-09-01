@@ -29,6 +29,16 @@ public final class Defaults {
 		map.put(long.class, 0L);
 		map.put(float.class, 0f);
 		map.put(double.class, 0d);
+		
+		map.put(Boolean.class, false);
+		map.put(Character.class, '\0');
+		map.put(Byte.class, (byte) 0);
+		map.put(Short.class, (short) 0);
+		map.put(Integer.class, 0);
+		map.put(Long.class, 0L);
+		map.put(Float.class, 0f);
+		map.put(Double.class, 0d);
+		
 		DEFAULTS = Collections.unmodifiableMap(map);
 	}
 
