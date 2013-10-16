@@ -54,14 +54,17 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 	
 	private int codeExceptionBase = 99000; // 99_000
 	private boolean sameCode = true;
-	private int codeBindException = codeExceptionBase + 1; // BindException result code
-	private int codeHttpMessageNotReadableException = codeExceptionBase + 2; // HttpMessageNotReadableException result code
-	private int codeMissingServletRequestPartException = codeExceptionBase + 3; // MissingServletRequestPartException result code
-	private int codeMissingServletRequestParameterException = codeExceptionBase + 4; // MissingServletRequestParameterException result code
-	private int codeTypeMismatchException = codeExceptionBase + 5; // TypeMismatchException result code
-	private int codeMethodArgumentNotValidException = codeExceptionBase + 6; // MethodArgumentNotValidException result code
+	private int codeBindException;
+	private int codeHttpMessageNotReadableException;
+	private int codeMissingServletRequestPartException;
+	private int codeMissingServletRequestParameterException;
+	private int codeTypeMismatchException = codeExceptionBase;
+	private int codeMethodArgumentNotValidException = codeExceptionBase;
 	
 	public CommonHandlerExceptionResolver() {
+		// reCountExceptionCode
+		this.reCountExceptionCode();
+		
 		setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 	
@@ -234,11 +237,22 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 	}
 
 	// set property
+	private void reCountExceptionCode() {
+		this.codeBindException = codeExceptionBase + 1; // BindException result code
+		this.codeHttpMessageNotReadableException = codeExceptionBase + 2; // HttpMessageNotReadableException result code
+		this.codeMissingServletRequestPartException = codeExceptionBase + 3; // MissingServletRequestPartException result code
+		this.codeMissingServletRequestParameterException = codeExceptionBase + 4; // MissingServletRequestParameterException result code
+		this.codeTypeMismatchException = codeExceptionBase + 5; // TypeMismatchException result code
+		this.codeMethodArgumentNotValidException = codeExceptionBase + 6; // MethodArgumentNotValidException result code
+	}
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 	public void setCodeExceptionBase(int codeExceptionBase) {
 		this.codeExceptionBase = codeExceptionBase;
+		
+		// reCountExceptionCode
+		this.reCountExceptionCode();
 	}
 	public void setSameCode(boolean sameCode) {
 		this.sameCode = sameCode;
