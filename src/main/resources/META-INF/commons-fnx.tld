@@ -208,12 +208,12 @@
 <!-- JSTL functions extension -->
 	<function>
 		<name>encodeURI</name>
-		<function-class>cn.com.cybertech.commons.web.taglibs.functions.Functions</function-class>
+		<function-class>my.commons.web.taglibs.functions.Functions</function-class>
 		<function-signature>java.lang.String encodeURI(java.lang.String)</function-signature>
 	</function>
 	<function>
 		<name>decodeURI</name>
-		<function-class>cn.com.cybertech.commons.web.taglibs.functions.Functions</function-class>
+		<function-class>my.commons.web.taglibs.functions.Functions</function-class>
 		<function-signature>java.lang.String decodeURI(java.lang.String)</function-signature>
 	</function>
 
@@ -285,12 +285,12 @@
 	<function>
 		<name>defaultIfEmpty</name>
 		<function-class>org.apache.commons.lang3.StringUtils</function-class>
-		<function-signature>java.lang.CharSequence defaultIfEmpty(java.lang.CharSequence, java.lang.CharSequence)</function-signature>
+		<function-signature>T defaultIfEmpty(T, T)</function-signature>
 	</function>
 	<function>
 		<name>defaultIfBlank</name>
 		<function-class>org.apache.commons.lang3.StringUtils</function-class>
-		<function-signature>java.lang.CharSequence defaultIfBlank(java.lang.CharSequence, java.lang.CharSequence)</function-signature>
+		<function-signature>T defaultIfBlank(T, T)</function-signature>
 	</function>
 	
 	<!-- abbreviate -->
@@ -302,7 +302,7 @@
 	<function>
 		<name>abbreviateMiddle</name>
 		<function-class>org.apache.commons.lang3.StringUtils</function-class>
-		<function-signature>java.lang.String abbreviate(java.lang.String, java.lang.String, int)</function-signature>
+		<function-signature>java.lang.String abbreviateMiddle(java.lang.String, java.lang.String, int)</function-signature>
 	</function>
 	
 	<!-- startsWith and  endsWith -->
@@ -319,12 +319,12 @@
 	<function>
 		<name>startsWithAny</name>
 		<function-class>org.apache.commons.lang3.StringUtils</function-class>
-		<function-signature>boolean startsWithAny(java.lang.CharSequence, java.lang.CharSequence[])</function-signature>
+		<function-signature>boolean startsWithAny(java.lang.CharSequence, java.lang.CharSequence...)</function-signature>
 	</function>
 	<function>
 		<name>endsWithAny</name>
 		<function-class>org.apache.commons.lang3.StringUtils</function-class>
-		<function-signature>boolean endsWithAny(java.lang.CharSequence, java.lang.CharSequence[])</function-signature>
+		<function-signature>boolean endsWithAny(java.lang.CharSequence, java.lang.CharSequence...)</function-signature>
 	</function>
 	
 	<!-- replace -->
