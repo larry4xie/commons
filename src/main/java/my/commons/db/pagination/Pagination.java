@@ -144,6 +144,13 @@ public class Pagination implements Serializable {
 		this.rowCount = rowCount;
 		return this;
 	}
+	
+	/**
+	 * @see #setRowCount(int)
+	 */
+	public Pagination setRowCount(long rowCount) {
+		return setRowCount((int)this.rowCount);
+	}
 
 	/**
 	 * 每一页数据量
