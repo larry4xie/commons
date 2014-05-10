@@ -45,7 +45,7 @@ public class Pagination implements Serializable {
 	}
 	
 	/**
-	 * 获取当前页数,过滤越线的情况
+	 * 获取当前页数,过滤小于1的情况
 	 * 
 	 * @return
 	 */
@@ -53,10 +53,10 @@ public class Pagination implements Serializable {
 		if (this.currentPage < 1) {
 			this.currentPage = 1;
 		}
-		int totalPage = getTotalPage();
-		if (this.currentPage > totalPage) {
-			this.currentPage = totalPage;
-		}
+//		int totalPage = getTotalPage();
+//		if (this.currentPage > totalPage) {
+//			this.currentPage = totalPage;
+//		}
 		return this.currentPage;
 	}
 	
@@ -149,7 +149,7 @@ public class Pagination implements Serializable {
 	 * @see #setRowCount(int)
 	 */
 	public Pagination setRowCount(long rowCount) {
-		return setRowCount((int)this.rowCount);
+		return setRowCount((int)rowCount);
 	}
 
 	/**
