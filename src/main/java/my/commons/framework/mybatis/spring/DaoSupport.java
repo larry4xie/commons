@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import my.commons.Assert;
 import my.commons.db.util.JdbcUtils;
+import my.commons.exception.AppException;
 import my.commons.framework.mybatis.MybatisUtils;
 import my.commons.framework.mybatis.batch.Batch;
 import my.commons.framework.mybatis.batch.PreparedBatch;
@@ -14,6 +16,7 @@ import my.commons.framework.mybatis.batch.PreparedBatch;
 import org.apache.ibatis.logging.jdbc.ConnectionLogger;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,7 +33,7 @@ import org.mybatis.spring.SqlSessionUtils;
  * @since 2011-12-06
  *
  */
-public class DaoSupport extends org.springframework.dao.support.DaoSupport {
+public abstract class DaoSupport extends org.springframework.dao.support.DaoSupport {
 	private SqlSession sqlSession;
 
 	private boolean externalSqlSession;
@@ -48,21 +51,6 @@ public class DaoSupport extends org.springframework.dao.support.DaoSupport {
 
 	public SqlSession getSession() {
 		return this.sqlSession;
-	}
-	
-	/**
-	 * 获取select的总数量<br/>
-	 * 采用select count(*)<br/>
-	 * 参考{@link DaoSupport#selectCount(SqlSession, String, Object)}
-	 * 
-	 * @param sqlSession
-	 * @param statement
-	 * @param parameter
-	 * @return
-	 * @throws SQLException 
-	 */
-	public long selectCount(String statement, Object parameter) throws SQLException {
-		return selectCount(this.getSession(), statement, parameter);
 	}
 	
 	/**
@@ -138,5 +126,127 @@ public class DaoSupport extends org.springframework.dao.support.DaoSupport {
 	 */
 	protected void checkDaoConfig() {
 		Assert.notNull(this.sqlSession, "Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required");
+	}
+	
+	// ================================ shortcut and exception process =========================================
+	/**
+	 * 处理mybatis操作数据库的异常<br/>
+	 */
+	protected abstract AppException handerException(Exception e)
+			throws AppException;
+
+	public <T> T selectOne(String statement) throws AppException {
+		try {
+			return this.getSession().selectOne(statement);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public <T> T selectOne(String statement, Object parameter)
+			throws AppException {
+		try {
+			return this.getSession().selectOne(statement, parameter);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public <E> List<E> selectList(String statement) throws AppException {
+		try {
+			return this.getSession().selectList(statement);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public <E> List<E> selectList(String statement, Object parameter)
+			throws AppException {
+		try {
+			return this.getSession().selectList(statement, parameter);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public <E> List<E> selectList(String statement, int offset, int limit)
+			throws AppException {
+		try {
+			return this.getSession().selectList(statement, null,
+					new RowBounds(offset, limit));
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public <E> List<E> selectList(String statement, Object parameter,
+			int offset, int limit) throws AppException {
+		try {
+			return this.getSession().selectList(statement, parameter,
+					new RowBounds(offset, limit));
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public long selectCount(String statement) throws AppException {
+		return this.selectCount(statement, null);
+	}
+
+	public long selectCount(String statement, Object parameter)
+			throws AppException {
+		try {
+			return this.selectCount(this.getSession(), statement, parameter);
+		} catch (SQLException e) {
+			throw handerException(e);
+		}
+	}
+
+	public int insert(String statement) throws AppException {
+		try {
+			return this.getSession().insert(statement);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public int insert(String statement, Object parameter) throws AppException {
+		try {
+			return this.getSession().insert(statement, parameter);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public int update(String statement) throws AppException {
+		try {
+			return this.getSession().update(statement);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public int update(String statement, Object parameter) throws AppException {
+		try {
+			return this.getSession().update(statement, parameter);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public int delete(String statement) throws AppException {
+		try {
+			return this.getSession().delete(statement);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
+	}
+
+	public int delete(String statement, Object parameter) throws AppException {
+		try {
+			return this.getSession().delete(statement, parameter);
+		} catch (Exception e) {
+			throw handerException(e);
+		}
 	}
 }

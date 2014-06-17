@@ -27,7 +27,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
  * @see DataRoutingContextHolder
  *
  */
-public class DynamicDaoSupport extends DaoSupport {
+public abstract class DynamicDaoSupport extends DaoSupport {
 	/**
 	 * SqlSessionFactory映射表
 	 */
