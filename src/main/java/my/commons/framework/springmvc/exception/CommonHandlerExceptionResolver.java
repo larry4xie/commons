@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import my.commons.Constants;
 import my.commons.Result;
 import my.commons.exception.AppException;
-import my.commons.framework.springmvc.MessageUtils;
+import my.commons.framework.spring.web.MessageUtils;
 import my.commons.framework.springmvc.annotation.ResponseMapping;
 import my.commons.framework.springmvc.annotation.ResponseMappings;
 import my.commons.lang.collections.Pair;

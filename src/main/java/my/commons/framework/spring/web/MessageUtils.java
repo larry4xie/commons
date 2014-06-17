@@ -1,4 +1,4 @@
-package my.commons.framework.springmvc;
+package my.commons.framework.spring.web;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -15,8 +15,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
- * Spring MVC 国际化工具类
- * @author xiegangs
+ * Spring web 国际化工具类
+ * @author xiegang
  * @since 2013-5-6
  *
  */
