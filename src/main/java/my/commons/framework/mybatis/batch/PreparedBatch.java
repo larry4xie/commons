@@ -30,7 +30,7 @@ public class PreparedBatch extends AbstractBatch {
 		// org.apache.ibatis.executor.statement.PreparedStatementHandler#instantiateStatement
 		Connection connection = this.sqlSession.getConnection();
 		if (MybatisUtils.PREPAREDSTATEMENT_LOG.isDebugEnabled() || MybatisUtils.CONNECTION_LOG.isDebugEnabled()) { // log proxy
-			connection =  ConnectionLogger.newInstance(connection, MybatisUtils.PREPAREDSTATEMENT_LOG);
+			connection = ConnectionLogger.newInstance(connection, MybatisUtils.PREPAREDSTATEMENT_LOG, 0);
 		}
 		MappedStatement mappedStatement = this.sqlSession.getConfiguration().getMappedStatement(statement);
 		String sql = mappedStatement.getBoundSql(parameter).getSql(); // PreparedStatement sql

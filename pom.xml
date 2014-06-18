@@ -22,9 +22,9 @@
 		<struts2.version>2.3.7</struts2.version>
 		<servlet.api.version>2.5</servlet.api.version>
 		<jsp.api.version>2.1</jsp.api.version>
-		<mybatis.version>3.1.1</mybatis.version>
-		<mybatis.spring.version>1.1.1</mybatis.spring.version>
-		<springframework.version>3.1.4.RELEASE</springframework.version>
+		<mybatis.version>3.2.7</mybatis.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+		<springframework.version>3.2.9.RELEASE</springframework.version>
 		<es.version>1.2.1</es.version>
 		<fastjson.version>1.1.25</fastjson.version>
 		<ehcache.version>2.5.6</ehcache.version>

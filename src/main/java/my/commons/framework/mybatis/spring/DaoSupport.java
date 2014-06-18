@@ -81,7 +81,7 @@ public abstract class DaoSupport extends org.springframework.dao.support.DaoSupp
 			Connection conn = ss.getConnection();
 			
 			if (MybatisUtils.PREPAREDSTATEMENT_LOG.isDebugEnabled() || MybatisUtils.CONNECTION_LOG.isDebugEnabled()) { // log proxy
-				conn =  ConnectionLogger.newInstance(conn, MybatisUtils.PREPAREDSTATEMENT_LOG);
+				conn =  ConnectionLogger.newInstance(conn, MybatisUtils.PREPAREDSTATEMENT_LOG, 0);
 			}
 			stmt = conn.prepareStatement(sql);
 			MybatisUtils.setParameters(stmt, mst, boundSql, parameter);

@@ -32,7 +32,7 @@ public class Batch extends AbstractBatch {
 		this.sqlSession = sqlSession;
 		Connection connection = this.sqlSession.getConnection();
 		if (MybatisUtils.STATEMENT_LOG.isDebugEnabled() || MybatisUtils.CONNECTION_LOG.isDebugEnabled()) { // log proxy
-			connection =  ConnectionLogger.newInstance(connection, MybatisUtils.STATEMENT_LOG);
+			connection =  ConnectionLogger.newInstance(connection, MybatisUtils.STATEMENT_LOG, 0);
 		}
 		this.statement = connection.createStatement();
 	}
