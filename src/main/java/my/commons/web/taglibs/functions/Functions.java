@@ -1,8 +1,8 @@
 package my.commons.web.taglibs.functions;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+
+import my.commons.web.util.ServletUtils;
 
 /**
  * JSTL Functions
@@ -15,10 +15,10 @@ public class Functions {
 	public static String URL_ENCODING = "UTF-8";
 	
 	public static String encodeURI(String s) throws UnsupportedEncodingException {
-		return URLEncoder.encode(s, URL_ENCODING);
+		return ServletUtils.encodeURI(s);
 	}
 	
 	public static String decodeURI(String s) throws UnsupportedEncodingException {
-		return URLDecoder.decode(s, URL_ENCODING);
+		return ServletUtils.decodeURI(s);
 	}
 }

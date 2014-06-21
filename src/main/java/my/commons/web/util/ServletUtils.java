@@ -164,10 +164,22 @@ public class ServletUtils {
 	}
 	
 	public static String encodeURI(String s) throws UnsupportedEncodingException {
-		return URLEncoder.encode(s, URL_ENCODING);
+		return URLEncoder.encode(s, URL_ENCODING)
+				.replaceAll("\\+", "%20")
+				.replaceAll("\\%21", "!")
+				.replaceAll("\\%27", "'")
+				.replaceAll("\\%28", "(")
+				.replaceAll("\\%29", ")")
+				.replaceAll("\\%7E", "~");
 	}
 	
 	public static String decodeURI(String s) throws UnsupportedEncodingException {
+		s = s.replaceAll("%20", "\\+")
+				.replaceAll("!", "\\%21")
+				.replaceAll("'", "\\%27")
+				.replaceAll("(", "\\%28")
+				.replaceAll(")", "\\%29")
+				.replaceAll("~", "\\%7E");
 		return URLDecoder.decode(s, URL_ENCODING);
 	}
 	
