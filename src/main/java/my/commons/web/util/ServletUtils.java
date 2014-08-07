@@ -235,35 +235,35 @@ public class ServletUtils {
 	/**
 	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
 	 */
-	public static String getRequestURI(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+	public static String getRequestURI(HttpServletRequest req, String[] excludeParams) {
 		return getRequestURI(req, true, excludeParams);
 	}
 	
 	/**
 	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
 	 */
-	public static String getRequestPATH(HttpServletRequest req, String[] excludeParams) throws UnsupportedEncodingException {
+	public static String getRequestPATH(HttpServletRequest req, String[] excludeParams) {
 		return getRequestPATH(req, true, excludeParams);
 	}
 	
 	/**
 	 * @see #getRequestURL(HttpServletRequest, boolean, String[])
 	 */
-	public static String getRequestURL(HttpServletRequest req) throws UnsupportedEncodingException {
+	public static String getRequestURL(HttpServletRequest req) {
 		return getRequestURL(req, true, null);
 	}
 	
 	/**
 	 * @see #getRequestURI(HttpServletRequest, boolean, String[])
 	 */
-	public static String getRequestURI(HttpServletRequest req) throws UnsupportedEncodingException {
+	public static String getRequestURI(HttpServletRequest req) {
 		return getRequestURI(req, true, null);
 	}
 	
 	/**
 	 * @see #getRequestPATH(HttpServletRequest, boolean, String[])
 	 */
-	public static String getRequestPATH(HttpServletRequest req) throws UnsupportedEncodingException {
+	public static String getRequestPATH(HttpServletRequest req) {
 		return getRequestPATH(req, true, null);
 	}
 	
