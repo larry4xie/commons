@@ -37,7 +37,7 @@ public class FormExceptionInterceptor extends AbstractInterceptor {
 			Object action = invocation.getAction();
 			if (action instanceof TextProvider) {
 				TextProvider tp = (TextProvider) action;
-				Result error = new Result(e.getExCode(), tp.getText("ex." + e.getExCode()));
+				Result error = new Result(e.getExCode(), tp.getText("ex." + e.getExCode()), null);
 				HttpServletRequest request = ServletActionContext.getRequest();
 				request.setAttribute(Result.RET, error.getRet());
 				request.setAttribute(Result.MSG, error.getMsg());

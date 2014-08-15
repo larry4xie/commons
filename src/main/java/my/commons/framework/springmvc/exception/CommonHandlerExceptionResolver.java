@@ -93,8 +93,7 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 				// 请求不合法
 				return handleBindException((BindException) ex, request, response, handler);
 			}
-		}
-		catch (Exception handlerException) {
+		} catch (Exception handlerException) {
 			logger.warn("Handling of [" + ex.getClass().getName() + "] resulted in Exception", handlerException);
 		}
 		// for default processing
@@ -189,49 +188,49 @@ public class CommonHandlerExceptionResolver extends AbstractHandlerExceptionReso
 	 * @throws IOException
 	 */
 	private ModelAndView handleApp(AppException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-		Result result = new Result(ex.getExCode(), MessageUtils.getMessage(request, "ex." + ex.getExCode()));
+		Result result = new Result(ex.getExCode(), MessageUtils.getMessage(request, "ex." + ex.getExCode()), null);
 		int httpStatus = HttpServletResponse.SC_INTERNAL_SERVER_ERROR; // 500
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}
 
 	private ModelAndView handleMissingServletRequestPartException(MissingServletRequestPartException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		int code = sameCode ? codeExceptionBase : codeMissingServletRequestPartException;
-		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code));
+		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code), null);
 		int httpStatus = HttpServletResponse.SC_BAD_REQUEST; // 400
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}
 
 	private ModelAndView handleBindException(BindException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		int code = sameCode ? codeExceptionBase : codeBindException;
-		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code));
+		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code), null);
 		int httpStatus = HttpServletResponse.SC_BAD_REQUEST; // 400
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}
 
 	private ModelAndView handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		int code = sameCode ? codeExceptionBase : codeMethodArgumentNotValidException;
-		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code));
+		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code), null);
 		int httpStatus = HttpServletResponse.SC_BAD_REQUEST; // 400
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}
 
 	private ModelAndView handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		int code = sameCode ? codeExceptionBase : codeHttpMessageNotReadableException;
-		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code));
+		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code), null);
 		int httpStatus = HttpServletResponse.SC_BAD_REQUEST; // 400
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}
 
 	private ModelAndView handleTypeMismatch(TypeMismatchException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		int code = sameCode ? codeExceptionBase : codeTypeMismatchException;
-		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code));
+		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code), null);
 		int httpStatus = HttpServletResponse.SC_BAD_REQUEST; // 400
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}
 	
 	private ModelAndView handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		int code = sameCode ? codeExceptionBase : codeMissingServletRequestParameterException;
-		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code));
+		Result result = new Result(code, MessageUtils.getMessage(request, "ex." + code), null);
 		int httpStatus = HttpServletResponse.SC_BAD_REQUEST; // 400
 		return handleException(result, httpStatus, ex, request, response, handler);
 	}

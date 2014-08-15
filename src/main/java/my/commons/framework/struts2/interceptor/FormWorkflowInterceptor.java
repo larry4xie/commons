@@ -48,7 +48,7 @@ public class FormWorkflowInterceptor extends MethodFilterInterceptor {
 			if (validationAware.hasErrors()) { // has action or field errors
 				if (errorMsg != null && errorMsg.length() > 0 && action instanceof TextProvider) {
 					// using fuzzy unified message
-					error = new Result(errorCode, ((TextProvider) action).getText(errorMsg));
+					error = new Result(errorCode, ((TextProvider) action).getText(errorMsg), null);
 				} else {
 					Collection<String> actionErrors = validationAware.getActionErrors();
 					Map<String, List<String>> fieldErrors = validationAware.getFieldErrors();

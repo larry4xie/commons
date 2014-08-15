@@ -50,7 +50,7 @@ public class AjaxExceptionInterceptor extends AbstractInterceptor {
 				response.setCharacterEncoding(encoding);
 				
 				PrintWriter out = response.getWriter();
-				Result result = new Result(e.getExCode(), tp.getText("ex." + e.getExCode()));
+				Result result = new Result(e.getExCode(), tp.getText("ex." + e.getExCode()), null);
 				out.print(result.toJsonString()); // output Ajax String
 				if (LOG.isDebugEnabled()) {
 					LOG.debug(new StringBuffer("Catch a Appexception and write to response json errors = ").append(result.toJsonString()).toString());
