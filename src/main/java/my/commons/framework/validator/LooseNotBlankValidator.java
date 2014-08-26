@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import my.commons.framework.validator.constraints.LooseNotBlank;
 
 /**
- * not blank string, but not required
+ * not blank string, but not required(null or empty string)
  * 
  * @author xiegang
  * @since 2014/08/26
@@ -22,7 +22,7 @@ public class LooseNotBlankValidator implements ConstraintValidator<LooseNotBlank
 
 	@Override
 	public boolean isValid(CharSequence value, ConstraintValidatorContext context) {
-		if (value == null) {
+		if (value == null || value.length() == 0) {
 			return true;
 		}
 		

@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.NotNull;
 
 import my.commons.framework.validator.FieldCompareValidator;
@@ -24,6 +25,7 @@ import my.commons.framework.validator.FieldCompareValidator;
 @Documented
 @Constraint(validatedBy = FieldCompareValidator.class)
 @NotNull
+@ReportAsSingleViolation
 public @interface FieldCompare {
     String message() default "{javax.validation.constraints.FieldCompare.message}";
 

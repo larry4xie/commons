@@ -15,32 +15,36 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 
-import my.commons.framework.validator.LooseNotBlankValidator;
+import my.commons.framework.validator.LooseLengthValidator;
 
 /**	
- * not blank string, but not required(null or empty string)
+ * string length, but not required(null or empty string)
  * @author xiegang
  * @since 2014/08/26
  */
 @Documented
-@Constraint(validatedBy = LooseNotBlankValidator.class)
+@Constraint(validatedBy = LooseLengthValidator.class)
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @ReportAsSingleViolation
-public @interface LooseNotBlank {
-	String message() default "{javax.validation.constraints.LooseNotBlank.message}";
+public @interface LooseLength {
+	String message() default "{javax.validation.constraints.LooseLength.message}";
+	
+	int min() default 1;
+
+	int max() default Integer.MAX_VALUE;
 
 	Class<?>[] groups() default { };
 
 	Class<? extends Payload>[] payload() default { };
 
 	/**
-	 * Defines several {@code @LooseNotBlank} annotations on the same element.
+	 * Defines several {@code @LooseLength} annotations on the same element.
 	 */
 	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 	@Retention(RUNTIME)
 	@Documented
 	public @interface List {
-		LooseNotBlank[] value();
+		LooseLength[] value();
 	}
 }
