@@ -14,13 +14,15 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import my.commons.framework.validator.LooseNotBlankValidator;
+
 /**	
  * not blank string, but not required
  * @author xiegang
  * @since 2014/08/26
  */
 @Documented
-@Constraint(validatedBy = { })
+@Constraint(validatedBy = LooseNotBlankValidator.class)
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 public @interface LooseNotBlank {
