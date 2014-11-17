@@ -1,7 +1,10 @@
 package my.commons.lang.util;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * <ol>
@@ -67,7 +70,7 @@ public class DateFormatUtils {
 	 */
 	public static String timeago(Date date, int trunc, String L) {
 		// s
-		int ct = (int)((System.currentTimeMillis() - date.getTime()) / 1000);
+		int ct = (int) ((System.currentTimeMillis() - date.getTime()) / 1000);
 		if (ct < 60) {
 			// 一分钟内
 			return "刚刚";
@@ -79,7 +82,8 @@ public class DateFormatUtils {
 			return ct / 3600 + "小时前";
 		} else if (ct >= 86400 && ct < 604800 && trunc >= 1){
 			// 7天以内
-			int day = ct / 86400;
+			int currDaySeconds = (int) DateUtils.getFragmentInSeconds(new Date(), Calendar.DAY_OF_YEAR);
+			int day = (ct- currDaySeconds) / 86400 + 1;
 			return day > 1 ? day + "天前" : "昨天";
 		} else if (ct >= 604800 && ct < 2592000 && trunc >= 2){
 			// 30天以内
