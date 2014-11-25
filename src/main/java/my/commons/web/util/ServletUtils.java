@@ -46,6 +46,31 @@ public class ServletUtils {
 		return requestedWith != null ? "XMLHttpRequest".equals(requestedWith) : false;
 	}
 	
+	/** 判断是否为搜索引擎  */
+	public static boolean isRobot(HttpServletRequest request) {
+		String ua = request.getHeader("user-agent");
+		if (StringUtils.isBlank(ua)) {
+			return false;
+		}
+		return ua.indexOf("Baiduspider") != -1
+				|| ua.indexOf("Googlebot") != -1 
+				|| ua.indexOf("sogou") != -1
+				|| ua.indexOf("sina") != -1
+				|| ua.indexOf("iaskspider") != -1
+				|| ua.indexOf("ia_archiver") != -1
+				|| ua.indexOf("Sosospider") != -1
+				|| ua.indexOf("YoudaoBot") != -1
+				|| ua.indexOf("yahoo") != -1
+				|| ua.indexOf("yodao") != -1
+				|| ua.indexOf("MSNBot") != -1
+				|| ua.indexOf("spider") != -1
+				|| ua.indexOf("Twiceler") != -1
+				|| ua.indexOf("Sosoimagespider") != -1
+				|| ua.indexOf("naver.com/robots") != -1
+				|| ua.indexOf("Nutch") != -1
+				|| ua.indexOf("spider") != -1;
+	}
+	
 	/**
 	 * 获取IP地址
 	 * @param request request current HTTP request
@@ -458,6 +483,11 @@ public class ServletUtils {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Not Found");
 			}
 		}
+	}
+	
+	/** forbidden request */
+	public static void forbidden(HttpServletResponse response) throws IOException {
+		response.sendError(HttpServletResponse.SC_FORBIDDEN);
 	}
 	
 	/**
