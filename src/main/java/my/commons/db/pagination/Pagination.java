@@ -19,6 +19,11 @@ public class Pagination implements Serializable {
 	public static final int DEFAULT_PAGESIZE = 10;
 	
 	/**
+	 * 数据其实偏移位置
+	 */
+	private int start;
+	
+	/**
 	 * 每一页的数据量
 	 */
 	private int pageSize;
@@ -40,8 +45,13 @@ public class Pagination implements Serializable {
 	
 	public Pagination() {
 		this.pageSize = DEFAULT_PAGESIZE;
+		this.start = 0;
 		this.totalPage = 1;
 		this.currentPage = 1;
+	}
+	
+	public int getStart() {
+		return this.start;
 	}
 	
 	/**
@@ -84,7 +94,8 @@ public class Pagination implements Serializable {
 	 * @return
 	 */
 	public int getTotalPage() {
-		totalPage = this.rowCount / this.getPageSize() + (this.rowCount % this.getPageSize() == 0 ? 0 : 1);
+		totalPage = (this.rowCount - this.start) / this.getPageSize() 
+				+ ((this.rowCount - this.start) % this.getPageSize() == 0 ? 0 : 1);
 		totalPage = totalPage < 1 ? 1 : totalPage;
 		
 		return this.totalPage;
@@ -96,7 +107,7 @@ public class Pagination implements Serializable {
 	 * @return
 	 */
 	public int getOffset() {
-		return (this.getCurrentPage() - 1) * this.getPageSize();
+		return this.start + (this.getCurrentPage() - 1) * this.getPageSize();
 	}
 	
 	/**
@@ -123,6 +134,14 @@ public class Pagination implements Serializable {
 	}
 
 	// setting...
+	
+	/**
+	 * 设置初始偏移	
+	 */
+	public Pagination setStart(int start) {
+		this.start = start;
+		return this;
+	}
 	
 	/**
 	 * 设置当前页数
