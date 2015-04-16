@@ -7,6 +7,8 @@ import java.io.StringWriter;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * wrapper for jsp template
  * @author xieg
@@ -30,6 +32,6 @@ public class JspWrapper extends HttpServletResponseWrapper {
 
 	@Override
 	public String toString() {
-		return writer.toString();
+		return StringUtils.strip(writer.toString(), " \t\r\n");
 	}
 }
